@@ -1,0 +1,23 @@
+name: Docker Check
+
+on:
+  push:
+    branches: ['main']
+  pull_request:
+    branches: ['main']
+
+jobs:
+  frontend-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3.0.0
+      - name: Build Frontend
+        uses: docker/build-push-action@v5.1.0
+        with:
+          context: .
+          push: false
+          tags: 'frontend'
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
