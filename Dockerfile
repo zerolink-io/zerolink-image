@@ -7,8 +7,6 @@ RUN apt update && \
     git ninja-build && \
     pip3 install -U pip
 
-# Tweak this list to reduce build time
-# https://developer.nvidia.com/cuda-gpus
 ENV TORCH_CUDA_ARCH_LIST "8.9"
 
 RUN pip3 install "torch==2.1.1"
@@ -22,7 +20,6 @@ RUN git clone https://github.com/NVIDIA/apex && \
     cd apex && git checkout 2386a912164b0c5cfcd8be7a2b890fbac5607c82 && \
     sed -i '/check_cuda_torch_binary_vs_bare_metal(CUDA_HOME)/d' setup.py && \
     python3 setup.py install --cpp_ext --cuda_ext
-
 
 COPY entrypoint.sh .
 
