@@ -1,0 +1,12 @@
+version: '3'
+services:
+  zerolink:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - HF_TOKEN=${HF_TOKEN}
+
+    # Change the model name to the model you want to use
+    command: --host 0.0.0.0 --model zerolink/zsql-en-postgres
